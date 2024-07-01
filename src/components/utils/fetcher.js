@@ -1,5 +1,3 @@
-// import { useStateContext } from "../../../context/ContextProvider"
-
 // export const get5DayForecast = async(latt, long) => {
 //     // const {lat, long} = useStateContext()
 //     try {
@@ -20,9 +18,8 @@ export const getLongAndLat = async (city) => {
         const apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_WEATHER_API}`
     
         const response = await fetch(apiURL)
-        // console.log(response)
         return response.json()
     } catch (error) {
-        // console.log(error)
+        console.log(error)
     }
     }
