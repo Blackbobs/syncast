@@ -1,4 +1,5 @@
 import DailyForecast from "./components/DailyForecast";
+import FiveDaysForecast from "./components/FiveDaysForecast";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 
@@ -14,6 +15,9 @@ function App() {
     </div>
     <div>
       <DailyForecast/>
+    </div>
+    <div>
+      <FiveDaysForecast/>
     </div>
     </>
   );

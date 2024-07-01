@@ -30,7 +30,7 @@ const DailyForecast = () => {
       console.log(result);
       return result;
     } catch (error) {
-      // console.log(error)
+      console.log(error);
     }
   };
 
@@ -48,10 +48,9 @@ const DailyForecast = () => {
 
         // Fetch 5-day forecast using longitude and latitude
         const forecastData = await getDailyForecast(long, latt);
-        setWeather(forecastData.weather[0].description);
-        setTemp(forecastData.main.temp);
-        setHumidity(forecastData.main.humidity);
-        console.log(forecastData.weather[0].description);
+        setWeather(forecastData?.weather[0]?.description);
+        setTemp(forecastData?.main?.temp);
+        setHumidity(forecastData?.main?.humidity);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -61,17 +60,23 @@ const DailyForecast = () => {
   }, [city, latt, long]);
   return (
     <section className="p-2 text-white">
-      <h1 className="text-2xl font-bold text-slate-950 py-3">Today's forecast</h1>
+      <h1 className="text-2xl font-bold text-slate-950 py-3">
+        Today's forecast
+      </h1>
       <div className="bg-slate-800 p-3 rounded-lg space-y-5">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Lagos</h2>
           <p className="text-[18px] font-medium">{temp}</p>
         </div>
         <div className="flex items-center justify-between">
-          <p className="text-[18px] flex items-center gap-2"><IoMdRainy size={30}/>{weather}</p>
+          <p className="text-[18px] flex items-center gap-2">
+            <IoMdRainy size={30} />
+            {weather}
+          </p>
           <small className="text-xl">
             {" "}
-            <span className="text-gray-300 font-medium">Humidity</span> - {humidity}
+            <span className="text-gray-300 font-medium">Humidity</span> -{" "}
+            {humidity}
           </small>
         </div>
       </div>
