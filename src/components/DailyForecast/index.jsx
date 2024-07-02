@@ -4,7 +4,7 @@ import { useStateContext } from "../../context/ContextProvider";
 import { IoMdRainy, IoMdSunny } from "react-icons/io";
 
 const DailyForecast = () => {
-  const { city, setLatt, setLong, latt, long } = useStateContext();
+  const { city, setLatt, setLong, latt, long, searchTerm } = useStateContext();
   const [weather, setWeather] = useState(null);
   const [temp, setTemp] = useState(null);
   const [humidity, setHumidity] = useState(null);
@@ -38,7 +38,7 @@ const DailyForecast = () => {
     const fetchData = async () => {
       try {
         // Fetch longitude and latitude based on city
-        const geoData = await getLongAndLat(city);
+        const geoData = await getLongAndLat(searchTerm, city);
         if (geoData && geoData.length > 0) {
           setLong(geoData[0]?.lon);
           setLatt(geoData[0]?.lat);
@@ -57,7 +57,7 @@ const DailyForecast = () => {
     };
 
     fetchData();
-  }, [city, latt, long]);
+  }, [city, latt, long, searchTerm]);
   return (
     <section className="p-2 text-white">
       <h1 className="text-2xl font-bold text-slate-950 py-3">
@@ -65,7 +65,7 @@ const DailyForecast = () => {
       </h1>
       <div className="bg-slate-800 p-3 rounded-lg space-y-5">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold">Lagos</h2>
+          <h2 className="text-2xl font-bold capitalize">{city}</h2>
           <p className="text-[18px] font-medium">{temp}</p>
         </div>
         <div className="flex items-center justify-between">

@@ -1,3 +1,4 @@
+
 // export const get5DayForecast = async(latt, long) => {
 //     // const {lat, long} = useStateContext()
 //     try {
@@ -13,9 +14,16 @@
 
 // }
 
-export const getLongAndLat = async (city) => {
+export const getLongAndLat = async (searchTerm, city) => {
     try {     
-        const apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_WEATHER_API}`
+        let apiURL = '';
+
+        if (searchTerm === '') {
+          apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_WEATHER_API}`;
+        } else {
+          apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=5&appid=${process.env.REACT_APP_WEATHER_API}`;
+        }
+    
     
         const response = await fetch(apiURL)
         return response.json()

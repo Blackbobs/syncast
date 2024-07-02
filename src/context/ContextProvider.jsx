@@ -4,7 +4,7 @@ export const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [city, setCity] = useState('lagos');
+  const [city, setCity] = useState('abeokuta');
   const [long, setLong] = useState("");
   const [latt, setLatt] = useState("");
 
