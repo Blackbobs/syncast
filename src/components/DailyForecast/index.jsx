@@ -8,7 +8,7 @@ const DailyForecast = () => {
   const [weather, setWeather] = useState('');
   const [temp, setTemp] = useState('');
   const [humidity, setHumidity] = useState('');
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
 
   // const API_KEY = process.env.REACT_APP_WEATHER_API
 
@@ -20,7 +20,7 @@ const DailyForecast = () => {
 
       const response = await fetch(apiURL);
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       return result;
     } catch (error) {
       console.log(error);
@@ -39,19 +39,13 @@ const DailyForecast = () => {
           throw new Error("Unable to fetch geographical coordinates");
         }
 
-        // Fetch 5-day forecast using longitude and latitude
+        // Fetch today's forecast using longitude and latitude
         const forecastData = await getDailyForecast(long, latt);
          if (forecastData) {
           setWeather(forecastData.weather[0]?.description)
           setTemp(forecastData.main?.temp)
           setHumidity(forecastData.main?.humidity)
-          // setData(
-          //   forecastData.map((entry) => ({
-          //     weather: entry.weather[0]?.description,
-          //     temp: entry.main?.temp,
-          //     humidity: entry.main?.humidity,
-          //   }))
-          // )
+     
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -68,7 +62,7 @@ const DailyForecast = () => {
       <div className="bg-slate-800 p-3 rounded-lg space-y-5">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold capitalize">{city}</h2>
-          <p className="text-[18px] font-medium">{temp}</p>
+          <p className="text-[18px] font-medium">{temp} <sup>o</sup> <span className="capitalize">C</span> </p>
         </div>
         <div className="flex items-center justify-between">
           <p className="text-[18px] flex items-center gap-2">
@@ -78,7 +72,7 @@ const DailyForecast = () => {
           <small className="text-xl">
             {" "}
             <span className="text-gray-300 font-medium">Humidity</span> -{" "}
-            {humidity}
+            {humidity} %
           </small>
         </div>
       </div>
