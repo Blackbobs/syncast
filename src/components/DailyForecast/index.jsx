@@ -38,7 +38,7 @@ const DailyForecast = () => {
     const fetchData = async () => {
       try {
         // Fetch longitude and latitude based on city
-        const geoData = await getLongAndLat(city);
+        const geoData = await getLongAndLat(searchTerm, city);
         if (geoData && geoData.length > 0) {
           setLong(geoData[0]?.lon);
           setLatt(geoData[0]?.lat);

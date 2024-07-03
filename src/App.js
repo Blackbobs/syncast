@@ -10,6 +10,7 @@ function App() {
     <div>
       <Navbar/>
     </div>
+    <div className="container mx-auto">
     <div className="p-3 md:container mx-auto">
       <Search/>
     </div>
@@ -18,6 +19,7 @@ function App() {
     </div>
     <div>
       <FiveDaysForecast/>
+    </div>
     </div>
     </>
   );
