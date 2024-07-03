@@ -15,7 +15,7 @@ const DailyForecast = () => {
     try {
       // const apiURL = `api.openweathermap.org/data/2.5/forecast/daily?lat=${latt}&lon=${long}&cnt=6&appid=${process.env.REACT_APP_WEATHER_API}`
 
-      const apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latt}&lon=${long}&cnt=7&appid=${process.env.REACT_APP_WEATHER_API}`;
+      const apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latt}&lon=${long}&cnt=1&appid=${process.env.REACT_APP_WEATHER_API}`;
 
       // const options = {
       //   method: 'GET',
@@ -38,7 +38,7 @@ const DailyForecast = () => {
     const fetchData = async () => {
       try {
         // Fetch longitude and latitude based on city
-        const geoData = await getLongAndLat(searchTerm, city);
+        const geoData = await getLongAndLat(city);
         if (geoData && geoData.length > 0) {
           setLong(geoData[0]?.lon);
           setLatt(geoData[0]?.lat);
