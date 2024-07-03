@@ -5,17 +5,18 @@ import { IoMdRainy, IoMdSunny } from "react-icons/io";
 
 const DailyForecast = () => {
   const { city, setLatt, setLong, latt, long, searchTerm } = useStateContext();
-  const [weather, setWeather] = useState(null);
-  const [temp, setTemp] = useState(null);
-  const [humidity, setHumidity] = useState(null);
+  const [weather, setWeather] = useState('');
+  const [temp, setTemp] = useState('');
+  const [humidity, setHumidity] = useState('');
+  const [data, setData] = useState([]);
 
   // const API_KEY = process.env.REACT_APP_WEATHER_API
 
   const getDailyForecast = async () => {
     try {
-      // const apiURL = `api.openweathermap.org/data/2.5/forecast/daily?lat=${latt}&lon=${long}&cnt=6&appid=${process.env.REACT_APP_WEATHER_API}`
+      const apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latt}&lon=${long}&cnt=1&units=metric&appid=${process.env.REACT_APP_WEATHER_API}`
 
-      const apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latt}&lon=${long}&cnt=1&appid=${process.env.REACT_APP_WEATHER_API}`;
+      // const apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latt}&lon=${long}&cnt=1&appid=${process.env.REACT_APP_WEATHER_API}`;
 
       const response = await fetch(apiURL);
       const result = await response.json();
@@ -30,19 +31,28 @@ const DailyForecast = () => {
     const fetchData = async () => {
       try {
         // Fetch longitude and latitude based on city
-        const geoData = await getLongAndLat(searchTerm, city);
+        const geoData = await getLongAndLat(city);
         if (geoData && geoData.length > 0) {
-          setLong(geoData[0]?.lon);
-          setLatt(geoData[0]?.lat);
+         await setLong(geoData[0]?.lon);
+         await setLatt(geoData[0]?.lat);
         } else {
           throw new Error("Unable to fetch geographical coordinates");
         }
 
         // Fetch 5-day forecast using longitude and latitude
         const forecastData = await getDailyForecast(long, latt);
-        setWeather(forecastData?.weather[0]?.description);
-        setTemp(forecastData?.main?.temp);
-        setHumidity(forecastData?.main?.humidity);
+         if (forecastData) {
+          setWeather(forecastData.weather[0]?.description)
+          setTemp(forecastData.main?.temp)
+          setHumidity(forecastData.main?.humidity)
+          // setData(
+          //   forecastData.map((entry) => ({
+          //     weather: entry.weather[0]?.description,
+          //     temp: entry.main?.temp,
+          //     humidity: entry.main?.humidity,
+          //   }))
+          // )
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
