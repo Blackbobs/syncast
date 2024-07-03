@@ -10,7 +10,7 @@ function App() {
     <div>
       <Navbar/>
     </div>
-    <div className="container mx-auto">
+    <div className="max-w-screen-md mx-auto">
     <div className="p-3 md:container mx-auto">
       <Search/>
     </div>
