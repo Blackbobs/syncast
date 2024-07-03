@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { getLongAndLat } from "../utils/fetcher";
 import { useStateContext } from "../../context/ContextProvider";
 import { IoMdRainy, IoMdSunny } from "react-icons/io";
@@ -17,16 +17,8 @@ const DailyForecast = () => {
 
       const apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latt}&lon=${long}&cnt=1&appid=${process.env.REACT_APP_WEATHER_API}`;
 
-      // const options = {
-      //   method: 'GET',
-      //   headers: {
-      //     'x-rapidapi-key': 'bd0533e664mshde1103ced48fc3bp1bfa18jsn5774673d7b6c',
-      //     'x-rapidapi-host': 'weatherbit-v1-mashape.p.rapidapi.com'
-      //   }
-      // };
       const response = await fetch(apiURL);
       const result = await response.json();
-      // console.log(result.data.weather.description)
       console.log(result);
       return result;
     } catch (error) {

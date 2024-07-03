@@ -15,7 +15,7 @@
 
 export const getLongAndLat = async (city) => {
   try {
-    const apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_WEATHER_API}`;
+    const apiURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_WEATHER_API}`;
 
     const response = await fetch(apiURL);
     return response.json();
